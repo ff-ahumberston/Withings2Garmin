@@ -150,7 +150,9 @@ class GarminConnect(object):
             userdata = json.loads(json.loads(userdata_json_str))
             username = userdata["displayName"]
 
-            print("Garmin Connect User Name: ",username)
+            print(username)
+
+            sys.stderr.write('Garmin Connect User Name: ' + username + '\n')
 
         except Exception as e:
             print(e)
