@@ -24,7 +24,17 @@ Passwords are stored locally inside your host operating system. Make sure that t
 
 ## Initial run
 
-It's required to perform first run manually. During that you will need to chose user of of the scale and ``` config/withings_user.json``` will be created automatically for authorization purposes .
+
+
+It's required to perform first run manually. During that you will need to chose user of of the scale and ``` config/withings_user.json``` will be created automatically for authorization purposes.
+
+Please add execution rights to ```run.sh```
+```
+chmod +x run.sh
+```
+
+Perform initial config.
+
 ```
 ❯ ./sync.py
 Can't read config file config/withings_user.json
@@ -70,7 +80,27 @@ Fit file uploaded to Garmin Connect
 
 ## Automated sync
 
-Now you can utilize crontab as scheduler of script runs. It will allow to synchronize your measurements and you can forget about the script.  
+Now you can utilize crontab as scheduler of script runs. It will allow to synchronize your measurements and you can forget about the script. In below exaple Raspberry Pi was used as server.
+
+Execute ```crontab -e```
+
+```
+ */5 * * * * /home/pi/Withings2Garmin/run.sh >> /home/pi/cron.log 2>&1
+```
+
+This approach allows simple loging to ```/home/pi/cron.log``` directory. 
+
+```
+Sun 12 Jan 2020 02:25:01 PM CET
+Garmin Connect User Name: 3e7cc8d8-c9fd-40f4-98ec-28539ec6afc0
+Withings: Refresh Access Token
+Withings: Get Measurements
+   Measurements received
+3e7cc8d8-c9ed-4ff4-98ec-28539ec6afc0
+Fit file uploaded to Garmin Connect
+----------------------------------------
+```
+
 
 ## References
 
